@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hei {{ request.user }}!</h1>
+    <h2>Message List</h2>
+    <ul>
+    {% for message in latest_message_list %}
+        <li>{{ message.message_text }} {{ message.date }}</li>
+    {% endfor %}
+    </ul>
+    <p><a href="{% url 'hello:second' %}">Mene toiselle sivulle</a></p>
+</body>
+</html>
