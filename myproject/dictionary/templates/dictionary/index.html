@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Dictionary</title> 
+    </head>
+    <body>
+    <h1>Search Words</h1>
+    <form action="" method="get">
+        <label for="word">Word:</label>
+        <input type="text" id="word" name="word" size="40" autofocus>
+        <input type="submit" value="Search">
+        <br>
+        <output>
+        {% if definitions %}
+        <ul>
+            {% for definition in definitions %}
+                <li>{{ definition }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No definitions found.</p>
+        {% endif %}
+        </output>
+    </form>
+    <p><a href="{% url 'dictionary:add' %}">Add words to dictionary</a></p>
+    </body>
+</html>
