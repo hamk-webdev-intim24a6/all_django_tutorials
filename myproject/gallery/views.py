@@ -7,6 +7,7 @@ class IndexView(ListView):
     model = Post
     template_name = 'gallery/index.html'
     context_object_name = 'posts'
+    paginate_by = 6
 
 
 class ImageUploadView(CreateView):
