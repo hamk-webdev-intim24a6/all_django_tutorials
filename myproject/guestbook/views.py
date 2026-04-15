@@ -2,18 +2,11 @@ from django.http.response import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls.base import reverse_lazy
 from django.views.generic.edit import BaseFormView, CreateView
+from django.views.generic import ListView
 #from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from .models import Post
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = ['comment']
-        widgets = {
-            'comment': forms.Textarea
-        }
 
 class PostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
@@ -28,7 +21,9 @@ class PostView(LoginRequiredMixin, CreateView):
         super().form_valid(form)
         return HttpResponseRedirect(self.get_success_url())
 
-def index(request):
-    posts = Post.objects.all().order_by('-date')
-    context = {"posts": posts}
-    return render(request, 'guestbook/index.html', context)
+class IndexView(ListView):
+    model = Post
+    template_name = 'guestbook/index.html'
+    context_object_name = 'posts'
+    ordering = ['-date']
+    paginate_by = 5
