@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Make a New Guestbook Post</h1>
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <button type="submit">Create a new post</button>
+</form>
+<hr>
+<p><a href="{% url 'guestbook:index' %}">View Guestbook</a></p>
+{% endblock %}

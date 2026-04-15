@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'guestbook.apps.GuestbookConfig',
     'account.apps.AccountConfig',
     'dictionary.apps.DictionaryConfig',
     'hello.apps.HelloConfig',
@@ -116,6 +117,7 @@ USE_TZ = True
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REQUIRED = 'login'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

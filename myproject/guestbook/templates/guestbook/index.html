@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Guestbook</h1>
+<p><a href="{% url 'guestbook:post' %}">Add a new post</a></p>
+{% if posts %}
+<h2>Posts</h2>
+<ul>
+    {% for post in posts %}
+        <li><strong>{{ post.author }} {{ post.date }}</strong><br>
+            {{ post.comment|linebreaks }}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p>No posts were found.</p>
+{% endif %}
+{% endblock %}
