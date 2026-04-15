@@ -172,6 +172,37 @@
       font-size: 1.125rem;
     }
 
+    /* ── Pagination ── */
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem 2rem;
+    }
+    .page-btn {
+      display: inline-block;
+      padding: 0.45rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--link);
+      text-decoration: none;
+      font-size: 0.9375rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .page-btn:visited { color: var(--link-visited); }
+    .page-btn:hover, .page-btn:focus { background: var(--bg-card); color: var(--link-hover); }
+    .page-btn--disabled {
+      color: var(--text-secondary);
+      border-color: var(--border);
+      cursor: default;
+      opacity: 0.5;
+    }
+    .page-info {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+    }
+
     /* ── Responsive: 2 cols on tablet, 1 col on phone ── */
     @media (max-width: 900px) {
       .gallery { grid-template-columns: repeat(2, 1fr); }
@@ -193,7 +224,7 @@
 <body>
 
   <header class="header">
-    <h1>Gallery New</h1>
+    <h1>Simple Gallery</h1>
     <div class="theme-toggle">
       <span class="theme-toggle-label" id="toggle-label">Light</span>
       <label class="toggle-switch">
@@ -220,6 +251,24 @@
     <p class="empty-msg">No images yet. Be the first to upload one!</p>
     {% endfor %}
   </main>
+
+  {% if is_paginated %}
+  <nav class="pagination" aria-label="Page navigation">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="page-btn" aria-label="Previous page">&laquo; Prev</a>
+    {% else %}
+      <span class="page-btn page-btn--disabled" aria-disabled="true">&laquo; Prev</span>
+    {% endif %}
+
+    <span class="page-info">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="page-btn" aria-label="Next page">Next &raquo;</a>
+    {% else %}
+      <span class="page-btn page-btn--disabled" aria-disabled="true">Next &raquo;</span>
+    {% endif %}
+  </nav>
+  {% endif %}
 
   <script>
     (function () {
