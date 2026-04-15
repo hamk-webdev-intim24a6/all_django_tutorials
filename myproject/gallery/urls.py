@@ -6,7 +6,7 @@ from .views import *
 
 app_name = 'gallery'
 urlpatterns = [
-    path('', display_images, name = 'display_images'),
-    path('image_upload', image_upload, name = 'image_upload'),
-    path('success', success, name = 'success'),
+    path('', IndexView.as_view(), name = 'index'),
+    path('image_upload', ImageUploadView.as_view(), name = 'image_upload'),
+    path('success', SuccessView.as_view(), name = 'success'),
 ]

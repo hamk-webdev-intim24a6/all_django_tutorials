@@ -1,23 +1,20 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView, TemplateView
 from .models import Post
 from .forms import UploadForm
 
-def display_images(request):
-    if request.method == 'GET':
-        posts = Post.objects.all()
-        return render(request, 'gallery/index.html', {'posts' : posts})
-
-def image_upload(request):
-    if request.method == 'POST':
-        form = UploadForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('gallery:success')
-    else:
-        form = UploadForm()
-    return render(request, 'gallery/upload.html', {'form' : form})
+class IndexView(ListView):
+    model = Post
+    template_name = 'gallery/index.html'
+    context_object_name = 'posts'
 
 
-def success(request):
-    return render(request, 'gallery/success.html', {})
+class ImageUploadView(CreateView):
+    model = Post
+    form_class = UploadForm
+    template_name = 'gallery/upload.html'
+    success_url = reverse_lazy('gallery:success')
+
+
+class SuccessView(TemplateView):
+    template_name = 'gallery/success.html'
