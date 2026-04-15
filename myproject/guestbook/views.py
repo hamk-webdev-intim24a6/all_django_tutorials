@@ -17,10 +17,10 @@ class PostForm(forms.ModelForm):
 
 class PostView(LoginRequiredMixin, CreateView):
     login_url = '/login/'
-    form_class = PostForm
+    #form_class = PostForm
     model = Post
     template_name = 'guestbook/post.html'
-    #fields = ['comment']
+    fields = ['comment']
     success_url = reverse_lazy('guestbook:index')
     def form_valid(self, form):
         # Set the form's author to the submitter if the form is valid
