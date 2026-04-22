@@ -28,7 +28,9 @@ class DeleteMovieView(DeleteView):
 class IndexView(generic.ListView):
     template_name = 'moviedb/index.html'
     context_object_name = 'latest_movies'
+    paginate_by = 5
+
     def get_queryset(self):
         return Movie.objects.filter(
             pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
+        ).order_by('-pub_date')
