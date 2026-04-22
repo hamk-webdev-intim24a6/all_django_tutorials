@@ -32,7 +32,8 @@ urlpatterns = [
     path('dictionary/', include('dictionary.urls')),
     path('guestbook/', include('guestbook.urls')),
     path('gallery/', include('gallery.urls')),
-    path('feedback/', include('feedback.urls')),    
+    path('feedback/', include('feedback.urls')),
+    path('moviedb/', include('moviedb.urls')),        
 ]
 
 if settings.DEBUG:

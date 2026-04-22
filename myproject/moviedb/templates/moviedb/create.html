@@ -1,0 +1,8 @@
+<h1>Add a New Movie</h1>
+<form action="{% url 'moviedb:create' %}" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Add">
+</form>

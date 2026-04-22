@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load static %}
+
+<p></p><a href="{% url 'moviedb:create' %}">{% trans "Add a new movie" %}</a></p>
+
+<h1>Latest Movies</h1>
+{% if latest_movies %}
+    <ul>
+    {% for movie in latest_movies %}
+        <li><h2>{{ movie.title }}</h2>
+        <p>Published: {{ movie.pub_date }}</p>
+        <p>Directed by:
+        <ul>
+            {% for director in movie.directors.all %}
+            <li>{{ director.first_name }} {{ director.last_name }}</li>
+            {% endfor %}
+        </ul></p>
+        <p>Genres:
+            <ul>
+                {% for genre in movie.genres.all %}
+                <li>{{ genre.name }}</li>
+                {% endfor %}
+            </ul></p>
+        <p><a href="{{ movie.id }}/">Update movie information</a></p>
+        <p><a href="{{ movie.id }}/delete/">Delete movie</a></p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>{% trans "No new movies were available." %}</p>
+{% endif %}
