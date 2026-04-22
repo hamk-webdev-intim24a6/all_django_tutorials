@@ -3,6 +3,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Topic(models.Model):
     name = models.CharField(max_length=160)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['name'], name='feedback_t_name_3dd3b8_idx'),
+        ]
+
     def __str__(self):
         return self.name
 
@@ -13,5 +19,11 @@ class Feedback(models.Model):
     good = models.TextField(max_length=2000, blank=True)
     bad = models.TextField(max_length=2000, blank=True)
     date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['rating'], name='feedback_r_rating_1f8b65_idx'),
+        ]
+
     def __str__(self):
         return f"{self.date}"
